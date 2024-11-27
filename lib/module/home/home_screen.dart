@@ -66,27 +66,44 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             return Scaffold(
               appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(50),
+                  preferredSize: const Size.fromHeight(80),
                   child: AppBarWidget(
                     title: AppConstant.home,
                     showBackBtn: false,
                     bottom: PreferredSize(
                       preferredSize: const Size.fromHeight(40),
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            isInternetConnected
-                                ? "You're online!"
-                                : "No internet connection",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color:
-                                  isInternetConnected ? Colors.green : Colors.red,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                isInternetConnected
+                                    ? "You're online!"
+                                    : "No internet connection",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: isInternetConnected
+                                      ? Colors.greenAccent
+                                      : Colors.redAccent,
+                                ),
+                              ),
                             ),
-                          ),
+                            const Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "Log Out",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -94,25 +111,25 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 4),
                     child: TextFormField(
-                      decoration:  InputDecoration(hintText: "Search Here",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide(color: Colors.black)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0)
-                      ),
-
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: "Search Here",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(color: Colors.black)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(16, 0, 0, 0)),
                       controller: searchController,
-
                       onChanged: (value) {
-                          onSearchQuery(value.trim().toLowerCase());
-
+                        onSearchQuery(value.trim().toLowerCase());
                       },
                     ),
                   ),
@@ -122,7 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? searchList.length
                             : userList.length,
                         itemBuilder: (context, index) {
-                          return searchList.isNotEmpty ||  searchController.text.isNotEmpty
+                          return searchList.isNotEmpty ||
+                                  searchController.text.isNotEmpty
                               ? GestureDetector(
                                   onTap: () async {
                                     Navigator.push(

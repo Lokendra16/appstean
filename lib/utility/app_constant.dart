@@ -8,5 +8,5 @@ class AppConstant{
   static const String next ="Next";
   static const String enterName ="Enter Name";
   static const String home ="Home";
-
+static const String isLogin = "isLogin";
 }

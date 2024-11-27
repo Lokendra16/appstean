@@ -2,6 +2,7 @@ import 'package:appstean_test/main.dart';
 import 'package:appstean_test/module/home/home_screen.dart';
 import 'package:appstean_test/module/signup/sign_up_screen.dart';
 import 'package:appstean_test/utility/app_constant.dart';
+import 'package:appstean_test/utility/shared_preference.dart';
 import 'package:appstean_test/utility/widgets/app_bar_widget.dart';
 import 'package:appstean_test/utility/widgets/custom_button.dart';
 import 'package:appstean_test/utility/widgets/custom_field.dart';
@@ -69,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(builder: (_) => const HomeScreen()),
                           (route) => false);
+                      await SharedPrefer.instance.setBool(AppConstant.isLogin, true);
                     } else {
                       showErrorMsg("Alert", "Login Failed!");
                     }

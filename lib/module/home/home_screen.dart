@@ -7,7 +7,9 @@ import 'package:appstean_test/module/home/bloc/home_state.dart';
 import 'package:appstean_test/module/home/model/user_response.dart';
 import 'package:appstean_test/module/home/widgets/home_items.dart';
 import 'package:appstean_test/module/home_details/home_details.dart';
+import 'package:appstean_test/module/login/login_screen.dart';
 import 'package:appstean_test/utility/app_constant.dart';
+import 'package:appstean_test/utility/shared_preference.dart';
 import 'package:appstean_test/utility/widgets/app_bar_widget.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,14 +94,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            const Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                "Log Out",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                            GestureDetector(
+                              onTap: () async{
+                                await SharedPrefer.instance.clearAllData();
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const LoginScreen()),
+                                    (route) => false);
+                              },
+                              child: const Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "Log Out",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),

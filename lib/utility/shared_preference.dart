@@ -18,4 +18,8 @@ class SharedPrefer {
   Future<void> setBool(String key, bool value) async {
     await sp?.setBool(key, value);
   }
+
+  Future<bool> clearAllData() async {
+    return await sp!.clear();
+  }
 }
